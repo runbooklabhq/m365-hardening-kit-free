@@ -1,0 +1,11 @@
+ID,Control,Area,Sprint,Priority,Effort,Licence,Verify,Status,Owner,Done date,Notes
+E01,Create two break-glass (emergency access) accounts,Identity & access (Entra ID),Sprint 1 - Emergency,Highest,30 min,Any,"Both accounts exist, are excluded from all CA policies and a sign-in alert fires on a test sign-in.",To do,,,
+E02,Require MFA for all users,Identity & access (Entra ID),Sprint 1 - Emergency,Highest,1-2 h,Free (Security defaults) or Entra ID P1 (Conditional Access),Sign-in logs show MFA satisfied for interactive sign-ins; no user is excluded except break-glass accounts.,To do,,,
+E03,Block legacy authentication,Identity & access (Entra ID),Sprint 1 - Emergency,Highest,1 h,Entra ID P1 (or Security defaults),No successful legacy-auth sign-ins in the last 7 days.,To do,,,
+E04,Reduce and separate admin accounts,Identity & access (Entra ID),Sprint 1 - Emergency,High,1-2 h,Any (PIM needs Entra ID P2),"2-4 Global Admins, all cloud-only, none used for daily email.",To do,,,
+E05,Restrict user consent to applications,Identity & access (Entra ID),Sprint 1 - Emergency,High,30 min,Any,User consent setting is restricted and the admin consent workflow is on.,To do,,,
+E06,Confirm audit logging is on,Audit & governance,Sprint 1 - Emergency,High,15 min,Any (retention depends on license),An audit search returns events from the last 24 hours.,To do,,,
+E07,Block automatic external email forwarding,Exchange Online & email security,Sprint 1 - Emergency,High,30 min,Exchange Online,A test inbox rule forwarding to an external address is blocked; no unapproved forwarding remains.,To do,,,
+E08,Apply the Standard preset security policy,Exchange Online & email security,Sprint 1 - Emergency,High,30 min,EOP (Defender for Office 365 for Safe Links/Attachments),Preset policy shows On and covers all recipients.,To do,,,
+E09,"Set up SPF, DKIM and DMARC",Exchange Online & email security,Sprint 1 - Emergency,High,1 h + DNS wait,Any,"A message header shows spf=pass, dkim=pass, dmarc=pass.",To do,,,
+E10,Self-service password reset with banned passwords,Identity & access (Entra ID),Sprint 1 - Emergency,Medium,1 h,Entra ID P1 for SSPR with on-prem writeback and custom banned list,A test user can reset a password with two methods; a banned password is rejected.,To do,,,
