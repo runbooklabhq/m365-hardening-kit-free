@@ -24,6 +24,6 @@ Connect-ExchangeOnline
 
 ## Next: the full kit
 **M365 Hardening Kit: Complete** adds 48 controls in Sprints 2-5 (Entra ID, Exchange Online, Teams, SharePoint/OneDrive, Purview), 48 read-only checks, and the `m365-hardening-coach` Claude skill that turns your check results into a prioritised plan and a management summary. Includes the two late-2026 deadlines: Teams external file sharing default (MC1479514) and SMTP AUTH Basic auth off by default.
-→ https://kritikos12.gumroad.com/l/m365-hardening-kit?utm_source=free-kit
+→ https://gumroad.com/l/m365-hardening-kit?utm_source=free-kit
 
 MIT licence. Not affiliated with or endorsed by Microsoft. Test changes in Report-only or on a pilot group first.

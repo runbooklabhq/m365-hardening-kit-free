@@ -1,5 +1,5 @@
 <#
- M365 Hardening Kit: Emergency Top 10 - read-only checks (KritikosgnsStudio)
+ M365 Hardening Kit: Emergency Top 10 - read-only checks (Runbook Lab)
  Uses Get-* cmdlets only. Changes nothing in your tenant.
  Requires: Microsoft.Graph, ExchangeOnlineManagement, MicrosoftTeams, Microsoft.Online.SharePoint.PowerShell (as needed).
  Connect first, e.g.:

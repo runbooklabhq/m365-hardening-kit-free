@@ -1,6 +1,6 @@
 # M365 Hardening Kit: Emergency Top 10
 
-_Version 1.0 (approved by Giannis 2026-10-20)_
+_Version 1.0_
 
 The ten Microsoft 365 controls to do first, in one sprint. Free. Each control has why, steps, a read-only PowerShell check where one exists, how to verify, licence and effort. Continue with the Extended kit (Sprints 2-5, 48 controls).
 
