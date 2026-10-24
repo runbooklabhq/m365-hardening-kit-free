@@ -66,10 +66,10 @@ Get-MgPolicyIdentitySecurityDefaultEnforcementPolicy | Select-Object IsEnabled; 
 **Check (read-only PowerShell):**
 
 ```powershell
-Get-TransportConfig | Select-Object SmtpClientAuthenticationDisabled
+$sd = (Get-MgPolicyIdentitySecurityDefaultEnforcementPolicy).IsEnabled; "Security defaults enabled: $sd"; $ca = @(Get-MgIdentityConditionalAccessPolicy -All | Where-Object { ($_.Conditions.ClientAppTypes -contains 'exchangeActiveSync' -or $_.Conditions.ClientAppTypes -contains 'other') -and $_.GrantControls.BuiltInControls -contains 'block' }); if ($ca.Count -eq 0) { 'CA policies blocking legacy clients: none found' } else { $ca | ForEach-Object { "CA policy blocking legacy clients: $($_.DisplayName) [state: $($_.State)]" } }; "SMTP AUTH disabled org-wide: $((Get-TransportConfig).SmtpClientAuthenticationDisabled)"
 ```
 
-**Verify:** No successful legacy-auth sign-ins in the last 7 days.
+**Verify:** A Conditional Access policy that blocks Exchange ActiveSync + Other clients is On (state: enabled), or Security defaults are enabled; and Entra sign-in logs show no successful legacy-auth sign-ins in the last 7 days.
 
 **Licence:** Entra ID P1 (or Security defaults) · **Effort:** 1 h · **Priority:** Highest · **Sprint 1 - Emergency**
 

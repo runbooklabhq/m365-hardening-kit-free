@@ -16,7 +16,7 @@ function Invoke-Check($Id, $Title, [scriptblock]$Block) {
 }
 
 Invoke-Check 'E02' 'Require MFA for all users' { Get-MgPolicyIdentitySecurityDefaultEnforcementPolicy | Select-Object IsEnabled; Get-MgIdentityConditionalAccessPolicy | Select-Object DisplayName, State }
-Invoke-Check 'E03' 'Block legacy authentication' { Get-TransportConfig | Select-Object SmtpClientAuthenticationDisabled }
+Invoke-Check 'E03' 'Block legacy authentication' { $sd = (Get-MgPolicyIdentitySecurityDefaultEnforcementPolicy).IsEnabled; "Security defaults enabled: $sd"; $ca = @(Get-MgIdentityConditionalAccessPolicy -All | Where-Object { ($_.Conditions.ClientAppTypes -contains 'exchangeActiveSync' -or $_.Conditions.ClientAppTypes -contains 'other') -and $_.GrantControls.BuiltInControls -contains 'block' }); if ($ca.Count -eq 0) { 'CA policies blocking legacy clients: none found' } else { $ca | ForEach-Object { "CA policy blocking legacy clients: $($_.DisplayName) [state: $($_.State)]" } }; "SMTP AUTH disabled org-wide: $((Get-TransportConfig).SmtpClientAuthenticationDisabled)" }
 Invoke-Check 'E04' 'Reduce and separate admin accounts' { Get-MgDirectoryRoleMember -DirectoryRoleId (Get-MgDirectoryRole -Filter "displayName eq 'Global Administrator'").Id | ForEach-Object { $_.AdditionalProperties.userPrincipalName } }
 Invoke-Check 'E05' 'Restrict user consent to applications' { Get-MgPolicyAuthorizationPolicy | Select-Object -ExpandProperty DefaultUserRolePermissions | Select-Object PermissionGrantPoliciesAssigned }
 Invoke-Check 'E06' 'Confirm audit logging is on' { Get-AdminAuditLogConfig | Select-Object UnifiedAuditLogIngestionEnabled; Get-OrganizationConfig | Select-Object AuditDisabled }
