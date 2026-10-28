@@ -7,6 +7,7 @@ The ten Microsoft 365 security controls to do first, as a ready-to-run project: 
 | `m365-hardening-kit-emergency-top-10-guide.md` | Why, steps, check, verify, licence and effort for each control |
 | `m365-hardening-kit-emergency-top-10-jira-import.csv` | Jira Cloud import: epics + stories with parent links, priority, sprint and labels |
 | `m365-hardening-kit-emergency-top-10-tracker.csv` | Same backlog for Planner, Azure DevOps, Excel or Linear |
+| `m365-hardening-kit-emergency-top-10-project-plan.xlsx` | Excel project plan for teams without Jira: owner, dates, status drop-down, % complete and a progress dashboard by area and sprint |
 | `m365-hardening-kit-emergency-top-10-readonly-checks.ps1` | Get-* cmdlets only. Changes nothing. Writes `hardening-check-results.csv` |
 
 Controls: break-glass accounts · MFA for all users · block legacy auth · fewer admins · restrict app consent · audit log · block external forwarding · Standard preset policy · SPF/DKIM/DMARC · SSPR + banned passwords.
