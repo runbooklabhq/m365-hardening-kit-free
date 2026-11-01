@@ -1,8 +1,8 @@
-Issue ID,Issue Type,Summary,Description,Priority,Parent,Sprint,Labels
-1,Epic,M365 Hardening Kit: Identity & access (Entra ID),M365 Hardening Kit - Emergency Top 10,High,,,m365-hardening
-2,Epic,M365 Hardening Kit: Exchange Online & email security,M365 Hardening Kit - Emergency Top 10,High,,,m365-hardening
-3,Epic,M365 Hardening Kit: Audit & governance,M365 Hardening Kit - Emergency Top 10,High,,,m365-hardening
-4,Story,[E01] Create two break-glass (emergency access) accounts,"Why: If Conditional Access or MFA is misconfigured you can lock every admin out of the tenant. Two cloud-only emergency accounts keep a way back in.
+Issue ID,Issue Type,Summary,Description,Priority,Parent,Due date,Labels,Labels,Labels,Labels,Labels
+1,Epic,M365 Hardening Kit: Identity & access (Entra ID),M365 Hardening Kit - Emergency Top 10,High,,,runbooklab,rl-m365,identity,,
+2,Epic,M365 Hardening Kit: Exchange Online & email security,M365 Hardening Kit - Emergency Top 10,High,,,runbooklab,rl-m365,email,,
+3,Epic,M365 Hardening Kit: Audit & governance,M365 Hardening Kit - Emergency Top 10,High,,,runbooklab,rl-m365,governance,,
+4,Task,[E01] Create two break-glass (emergency access) accounts,"Why: If Conditional Access or MFA is misconfigured you can lock every admin out of the tenant. Two cloud-only emergency accounts keep a way back in.
 
 Steps:
 # Create two cloud-only accounts on the *.onmicrosoft.com domain with the Global Administrator role.
@@ -12,8 +12,9 @@ Steps:
 
 Verify: Both accounts exist, are excluded from all CA policies and a sign-in alert fires on a test sign-in.
 Licence: Any
-Effort: 30 min",Highest,1,Sprint 1 - Emergency,m365-hardening sprint-1
-5,Story,[E02] Require MFA for all users,"Why: Most account takeovers start with a stolen or sprayed password. MFA blocks the large majority of them.
+Effort: 30 min
+Sprint: Sprint 1 - Emergency",Highest,1,,runbooklab,rl-m365,E01,sprint-1,identity
+5,Task,[E02] Require MFA for all users,"Why: Most account takeovers start with a stolen or sprayed password. MFA blocks the large majority of them.
 
 Steps:
 # No Entra ID P1: turn on Security defaults (Entra admin center > Overview > Properties > Manage security defaults).
@@ -28,8 +29,11 @@ Get-MgPolicyIdentitySecurityDefaultEnforcementPolicy | Select-Object IsEnabled; 
 
 Verify: Sign-in logs show MFA satisfied for interactive sign-ins; no user is excluded except break-glass accounts.
 Licence: Free (Security defaults) or Entra ID P1 (Conditional Access)
-Effort: 1-2 h",Highest,1,Sprint 1 - Emergency,m365-hardening sprint-1
-6,Story,[E03] Block legacy authentication,"Why: Legacy protocols (basic auth over IMAP, POP, SMTP AUTH, older Office clients) cannot do MFA and are the main path for password-spray attacks.
+Effort: 1-2 h
+Sprint: Sprint 1 - Emergency",Highest,1,,runbooklab,rl-m365,E02,sprint-1,identity
+6,Task,[E03] Block legacy authentication,"Microsoft date: Part of this control has a Microsoft date: SMTP AUTH Basic authentication is turned off by default in existing tenants at the end of December 2026 (MC786329). The Complete kit's control M01 covers moving every sender off Basic auth.
+
+Why: Legacy protocols (basic auth over IMAP, POP, SMTP AUTH, older Office clients) cannot do MFA and are the main path for password-spray attacks.
 
 Steps:
 # Check Entra sign-in logs filtered by Client app = legacy clients to find who still uses them.
@@ -44,8 +48,9 @@ $sd = (Get-MgPolicyIdentitySecurityDefaultEnforcementPolicy).IsEnabled; ""Securi
 
 Verify: A Conditional Access policy that blocks Exchange ActiveSync + Other clients is On (state: enabled), or Security defaults are enabled; and Entra sign-in logs show no successful legacy-auth sign-ins in the last 7 days.
 Licence: Entra ID P1 (or Security defaults)
-Effort: 1 h",Highest,1,Sprint 1 - Emergency,m365-hardening sprint-1
-7,Story,[E04] Reduce and separate admin accounts,"Why: Every Global Administrator is a full-tenant compromise if phished. Daily mail use on an admin account multiplies the risk.
+Effort: 1 h
+Sprint: Sprint 1 - Emergency",Highest,1,,runbooklab,rl-m365,E03,sprint-1,identity
+7,Task,[E04] Reduce and separate admin accounts,"Why: Every Global Administrator is a full-tenant compromise if phished. Daily mail use on an admin account multiplies the risk.
 
 Steps:
 # List all users with privileged roles (Entra admin center > Roles and administrators).
@@ -60,8 +65,9 @@ Get-MgDirectoryRoleMember -DirectoryRoleId (Get-MgDirectoryRole -Filter ""displa
 
 Verify: 2-4 Global Admins, all cloud-only, none used for daily email.
 Licence: Any (PIM needs Entra ID P2)
-Effort: 1-2 h",High,1,Sprint 1 - Emergency,m365-hardening sprint-1
-8,Story,[E05] Restrict user consent to applications,"Why: Consent-phishing apps get mailbox and file access without a password. Unrestricted user consent lets any user grant it.
+Effort: 1-2 h
+Sprint: Sprint 1 - Emergency",High,1,,runbooklab,rl-m365,E04,sprint-1,identity
+8,Task,[E05] Restrict user consent to applications,"Why: Consent-phishing apps get mailbox and file access without a password. Unrestricted user consent lets any user grant it.
 
 Steps:
 # Entra admin center > Enterprise applications > Consent and permissions.
@@ -76,8 +82,9 @@ Get-MgPolicyAuthorizationPolicy | Select-Object -ExpandProperty DefaultUserRoleP
 
 Verify: User consent setting is restricted and the admin consent workflow is on.
 Licence: Any
-Effort: 30 min",High,1,Sprint 1 - Emergency,m365-hardening sprint-1
-9,Story,[E06] Confirm audit logging is on,"Why: Without the unified audit log there is no evidence to investigate an incident.
+Effort: 30 min
+Sprint: Sprint 1 - Emergency",High,1,,runbooklab,rl-m365,E05,sprint-1,identity
+9,Task,[E06] Confirm audit logging is on,"Why: Without the unified audit log there is no evidence to investigate an incident.
 
 Steps:
 # Microsoft Purview portal > Audit: confirm auditing is on (start recording if prompted).
@@ -91,8 +98,9 @@ Get-AdminAuditLogConfig | Select-Object UnifiedAuditLogIngestionEnabled; Get-Org
 
 Verify: An audit search returns events from the last 24 hours.
 Licence: Any (retention depends on license)
-Effort: 15 min",High,3,Sprint 1 - Emergency,m365-hardening sprint-1
-10,Story,[E07] Block automatic external email forwarding,"Why: Attackers who take over a mailbox add forwarding rules to copy mail out silently.
+Effort: 15 min
+Sprint: Sprint 1 - Emergency",High,3,,runbooklab,rl-m365,E06,sprint-1,governance
+10,Task,[E07] Block automatic external email forwarding,"Why: Attackers who take over a mailbox add forwarding rules to copy mail out silently.
 
 Steps:
 # Microsoft Defender portal > Email & collaboration > Policies > Anti-spam > Outbound policy.
@@ -106,8 +114,9 @@ Get-HostedOutboundSpamFilterPolicy | Select-Object Name, AutoForwardingMode; Get
 
 Verify: A test inbox rule forwarding to an external address is blocked; no unapproved forwarding remains.
 Licence: Exchange Online
-Effort: 30 min",High,2,Sprint 1 - Emergency,m365-hardening sprint-1
-11,Story,[E08] Apply the Standard preset security policy,"Why: Microsoft's preset policies apply recommended anti-phishing, anti-malware, Safe Links and Safe Attachments settings in one step and update with new recommendations.
+Effort: 30 min
+Sprint: Sprint 1 - Emergency",High,2,,runbooklab,rl-m365,E07,sprint-1,email
+11,Task,[E08] Apply the Standard preset security policy,"Why: Microsoft's preset policies apply recommended anti-phishing, anti-malware, Safe Links and Safe Attachments settings in one step and update with new recommendations.
 
 Steps:
 # Microsoft Defender portal > Email & collaboration > Policies > Preset security policies.
@@ -121,8 +130,9 @@ Get-EOPProtectionPolicyRule | Select-Object Name, State
 
 Verify: Preset policy shows On and covers all recipients.
 Licence: EOP (Defender for Office 365 for Safe Links/Attachments)
-Effort: 30 min",High,2,Sprint 1 - Emergency,m365-hardening sprint-1
-12,Story,"[E09] Set up SPF, DKIM and DMARC","Why: Without email authentication anyone can send mail that appears to come from your domain.
+Effort: 30 min
+Sprint: Sprint 1 - Emergency",High,2,,runbooklab,rl-m365,E08,sprint-1,email
+12,Task,"[E09] Set up SPF, DKIM and DMARC","Why: Without email authentication anyone can send mail that appears to come from your domain.
 
 Steps:
 # Publish one SPF record listing every service that sends as your domain.
@@ -136,8 +146,11 @@ Get-DkimSigningConfig | Select-Object Domain, Enabled
 
 Verify: A message header shows spf=pass, dkim=pass, dmarc=pass.
 Licence: Any
-Effort: 1 h + DNS wait",High,2,Sprint 1 - Emergency,m365-hardening sprint-1
-13,Story,[E10] Self-service password reset with banned passwords,"Why: SSPR cuts helpdesk-assisted resets (a social-engineering target) and banned-password lists stop the most guessed passwords.
+Effort: 1 h + DNS wait
+Sprint: Sprint 1 - Emergency",High,2,,runbooklab,rl-m365,E09,sprint-1,email
+13,Task,[E10] Self-service password reset with banned passwords,"Microsoft date: From 7 November 2026 self-service password reset accepts only methods users registered themselves; phone numbers and email addresses held in the directory stop working for SSPR (MC1325414). Make sure users have registered their own methods by 6 November.
+
+Why: SSPR cuts helpdesk-assisted resets (a social-engineering target) and banned-password lists stop the most guessed passwords.
 
 Steps:
 # Entra admin center > Protection > Password reset: enable for all users with two methods.
@@ -146,4 +159,5 @@ Steps:
 
 Verify: A test user can reset a password with two methods; a banned password is rejected.
 Licence: Entra ID P1 for SSPR with on-prem writeback and custom banned list
-Effort: 1 h",Medium,1,Sprint 1 - Emergency,m365-hardening sprint-1
+Effort: 1 h
+Sprint: Sprint 1 - Emergency",Medium,1,2026-11-06,runbooklab,rl-m365,E10,sprint-1,identity

@@ -1,6 +1,6 @@
 # M365 Hardening Kit: Emergency Top 10
 
-_Version 1.0_
+_Version 1.1_
 
 The ten Microsoft 365 controls to do first, in one sprint. Free. Each control has why, steps, a read-only PowerShell check where one exists, how to verify, licence and effort. Continue with the Extended kit (Sprints 2-5, 48 controls).
 
@@ -54,6 +54,8 @@ Get-MgPolicyIdentitySecurityDefaultEnforcementPolicy | Select-Object IsEnabled; 
 **Licence:** Free (Security defaults) or Entra ID P1 (Conditional Access) · **Effort:** 1-2 h · **Priority:** Highest · **Sprint 1 - Emergency**
 
 ## E03. Block legacy authentication
+
+**Microsoft date:** Part of this control has a Microsoft date: SMTP AUTH Basic authentication is turned off by default in existing tenants at the end of December 2026 (MC786329). The Complete kit's control M01 covers moving every sender off Basic auth.
 
 **Why:** Legacy protocols (basic auth over IMAP, POP, SMTP AUTH, older Office clients) cannot do MFA and are the main path for password-spray attacks.
 
@@ -190,6 +192,8 @@ Get-DkimSigningConfig | Select-Object Domain, Enabled
 **Licence:** Any · **Effort:** 1 h + DNS wait · **Priority:** High · **Sprint 1 - Emergency**
 
 ## E10. Self-service password reset with banned passwords
+
+**Microsoft date:** From 7 November 2026 self-service password reset accepts only methods users registered themselves; phone numbers and email addresses held in the directory stop working for SSPR (MC1325414). Make sure users have registered their own methods by 6 November. **Due: 2026-11-06**
 
 **Why:** SSPR cuts helpdesk-assisted resets (a social-engineering target) and banned-password lists stop the most guessed passwords.
 
