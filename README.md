@@ -1,5 +1,9 @@
 # M365 Hardening Kit: Emergency Top 10 (free)
 
+[![M365 Hardening Kit: Emergency Top 10 (free)](assets/cover.png)](https://runbooklabhq.com/kits/m365-hardening/)
+
+**[Every control on the kit page](https://runbooklabhq.com/kits/m365-hardening/)** · [Microsoft 365 deadline calendar](https://runbooklabhq.com/guides/deadlines/) · [Runbook Lab](https://runbooklabhq.com/)
+
 The ten Microsoft 365 security controls to do first, as a ready-to-run project: guide, Jira backlog, tracker and read-only PowerShell checks.
 
 | File | What it is |
