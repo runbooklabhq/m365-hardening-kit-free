@@ -34,9 +34,9 @@ Connect-ExchangeOnline
 
 ## Next: the full kit
 **M365 Hardening Kit: Complete** adds 48 controls in Sprints 2-5 (Entra ID, Exchange Online, Teams, SharePoint/OneDrive, Purview), 40 more read-only checks (48 in all), the `m365-hardening-coach` Claude skill that turns your check results into a prioritised plan and a management summary, and **opens the whole plan as Jira tickets with one command** (`Import-RunbookLabPlan.ps1`): it skips tickets that already exist and can record each read-only check result on its ticket. Includes the two late-2026 deadlines: Teams external file sharing default (MC1479514) and SMTP AUTH Basic auth off by default.
-→ Kit page: https://runbooklabhq.com/kits/m365-hardening/?utm_source=github&utm_medium=readme&utm_campaign=m365-hardening-kit-free-repo&utm_content=next-kit
-→ Buy: https://gumroad.com/l/m365-hardening-kit?utm_source=github&utm_medium=readme&utm_campaign=m365-hardening-kit-free-repo&utm_content=next-kit
+→ Kit page: https://runbooklabhq.com/kits/m365-hardening/
+→ Buy: https://gumroad.com/l/m365-hardening-kit
 
-More: the free SMTP AUTH checklist https://runbooklabhq.com/guides/exchange-online-smtp-auth-basic-auth-checklist/?utm_source=github&utm_medium=readme&utm_campaign=m365-hardening-kit-free-repo&utm_content=guide and Microsoft 365 security news https://runbooklabhq.com/?utm_source=github&utm_medium=readme&utm_campaign=m365-hardening-kit-free-repo&utm_content=home
+More: the free SMTP AUTH checklist https://runbooklabhq.com/guides/exchange-online-smtp-auth-basic-auth-checklist/ and Microsoft 365 security news https://runbooklabhq.com/
 
 MIT licence. Not affiliated with or endorsed by Microsoft. Test changes in Report-only or on a pilot group first.
